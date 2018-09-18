@@ -6,6 +6,6 @@ This folder will be where you complete your pre-class each week. The first time 
 Before you continue, Edit this document with:
 
 
-- Preferred Name: 
-- Brown Name: 
-- Brown E-mail:
+- Preferred Name: Kitty
+- Brown Name: Kitty Cheung
+- Brown E-mail: kitty_cheung@brown.edu
