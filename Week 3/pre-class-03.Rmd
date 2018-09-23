@@ -1,16 +1,34 @@
+Use dplyr functions to address the following questions:
 
-We will work with the dataset called gapminder, this is a cleaned up version from Gapminder Data. Gapminder contains a lot of great data on all of the nations of the world. We first need to install the gapminder package in R.
-
-install.packages("gapminder")
+```{r}
 library(dplyr)
 library(gapminder)
 gapminder
- ```{r}
- 
-Pre-Class Problems
-Use dplyr functions to address the following questions:
+```
 
 How many unique countries are represented per continent?
+33 in Asia, 52 in Africa, 25 in Americas, and 2 in Oceania.
+```{r}
+data <- gapminder
+unique(data$continent)
+
+asia <- filter(data, continent == "Asia")
+length(unique(asia$country))
+
+europe <- filter(data, continent == "Europe")
+length(unique(europe$country))
+
+africa <- filter(data, continent == "Africa")
+length(unique(africa$country))
+
+americas <- filter(data, continent == "Americas")
+length(unique(americas$country))
+
+oceania <- filter(data, continent == "Oceania")
+length(unique(oceania$country))
+
+
+```
 
 Which European nation had the lowest GDP per capita in 1997?
 
@@ -26,6 +44,7 @@ Which combinations of continent (besides Asia) and year have the highest average
 
 Which three countries have had the most consistent population estimates (i.e. lowest standard deviation) across the years of available data?
 
-Subset gm to only include observations from 1992 and store the results as gm1992. What kind of object is this?
+Subset gm to only include observations from 1992 and store the results as gm1992. What kind of object is 
+this?
 
 Which observations indicate that the population of a country has decreased from the previous year and the life expectancy has increased from the previous year? See the vignette on window functions.
