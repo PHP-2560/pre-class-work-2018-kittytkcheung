@@ -31,8 +31,21 @@ length(unique(oceania$country))
 ```
 
 Which European nation had the lowest GDP per capita in 1997?
+Albania
+```{r}
+
+eur_1997 <- filter(europe, year == 1997)
+which.min(eur_1997$gdpPercap)
+
+
+```
 
 According to the data available, what was the average life expectancy across each continent in the 1980s?
+
+``` {r}
+
+
+```
 
 What 5 countries have the highest total GDP over all years combined?
 
