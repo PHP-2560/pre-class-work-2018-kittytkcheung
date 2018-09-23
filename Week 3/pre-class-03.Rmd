@@ -26,25 +26,32 @@ length(unique(americas$country))
 
 oceania <- filter(data, continent == "Oceania")
 length(unique(oceania$country))
-
-
 ```
 
 Which European nation had the lowest GDP per capita in 1997?
 Albania
 ```{r}
-
 eur_1997 <- filter(europe, year == 1997)
 which.min(eur_1997$gdpPercap)
-
-
 ```
 
 According to the data available, what was the average life expectancy across each continent in the 1980s?
-
+52.469 years in Africa, 63.735 in Asia, 73.224 in Europe, 67.16 in Americas, and 74.805 in Oceania.
 ``` {r}
+africa_80s <- filter(africa, year >= 1980 & year < 1990)
+mean(africa_80s$lifeExp)
 
+asia_80s <- filter(asia, year >= 1980 & year < 1990)
+mean(asia_80s$lifeExp)
 
+eur_80s <- filter(europe, year >= 1980 & year < 1990)
+mean(eur_80s$lifeExp)
+
+americas_80s <- filter(americas, year >= 1980 & year < 1990)
+mean(americas_80s$lifeExp)
+
+ocean_80s <- filter(oceania, year >= 1980 & year < 1990)
+mean(ocean_80s$lifeExp)
 ```
 
 What 5 countries have the highest total GDP over all years combined?
