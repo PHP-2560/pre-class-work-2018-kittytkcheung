@@ -56,7 +56,22 @@ mean(ocean_80s$lifeExp)
 
 What 5 countries have the highest total GDP over all years combined?
 
+```{r}
+library(tidyr)
+
+data %>%
+  group_by(country) %>%
+  summarize()
+  
+
+```
+
 What countries and years had life expectancies of at least 80 years? N.b. only output the columns of interest: country, life expectancy and year (in that order).
+```{r}
+data %>%
+  filter(lifeExp > 80) %>%
+  select(country, lifeExp, year)
+```
 
 What 10 countries have the strongest correlation (in either direction) between life expectancy and per capita GDP?
 
