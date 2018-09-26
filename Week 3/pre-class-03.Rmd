@@ -97,7 +97,9 @@ class(gm1992)
 Which observations indicate that the population of a country has decreased from the previous year and the life expectancy has increased from the previous year? See the vignette on window functions.
 
 ```{r}
-
+data %>%
+  group_by(country, year) %>%
+  filter(lag(pop) > pop, lifeExp > lag(lifeExp))
 
 ```
 
