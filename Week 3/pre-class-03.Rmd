@@ -98,9 +98,9 @@ Which observations indicate that the population of a country has decreased from 
 
 ```{r}
 data %>%
-  group_by(country, year) %>%
-  filter(lag(pop) > pop, lifeExp > lag(lifeExp))
-
+  group_by(country) %>%
+  mutate(lag_pop= lag(pop) > pop, lag_life = lifeExp > lag(lifeExp)) %>%
+  filter(lag_pop == TRUE & lag_life == TRUE)
 ```
 
 
