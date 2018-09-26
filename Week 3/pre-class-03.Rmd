@@ -17,6 +17,7 @@ data %>%
 ```
 
 Which European nation had the lowest GDP per capita in 1997?
+Albania
 ```{r}
 low_gdp <- data %>%
   filter(continent == "Europe", year == 1997) %>%
@@ -26,6 +27,7 @@ low_gdp[1,]
 ```
 
 According to the data available, what was the average life expectancy across each continent in the 1980s?
+Africa 52.5, Americas 67.2, Asia 63.7, Europe 73.2, Oceania 74.8
 ``` {r}
 data %>% 
   group_by(continent) %>%
@@ -34,6 +36,7 @@ data %>%
 ```
 
 What 5 countries have the highest total GDP over all years combined?
+Kuwait, Switzerland, Norway, US, Canada
 
 ```{r}
 data %>%
@@ -68,7 +71,7 @@ Which combinations of continent (besides Asia) and year have the highest average
 ```
 
 Which three countries have had the most consistent population estimates (i.e. lowest standard deviation) across the years of available data?
-
+Sao Tome & Principe, Iceland, Montenegro
 ```{r}
 sd_pop <- data %>%
   group_by(country) %>%
