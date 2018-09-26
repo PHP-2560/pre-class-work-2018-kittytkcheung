@@ -10,22 +10,10 @@ How many unique countries are represented per continent?
 33 in Asia, 52 in Africa, 25 in Americas, and 2 in Oceania.
 ```{r}
 data <- gapminder
-unique(data$continent)
 
-asia <- filter(data, continent == "Asia")
-length(unique(asia$country))
-
-europe <- filter(data, continent == "Europe")
-length(unique(europe$country))
-
-africa <- filter(data, continent == "Africa")
-length(unique(africa$country))
-
-americas <- filter(data, continent == "Americas")
-length(unique(americas$country))
-
-oceania <- filter(data, continent == "Oceania")
-length(unique(oceania$country))
+data %>%
+  group_by(continent) %>%
+  summarize(unique=length(unique(country)))
 ```
 
 Which European nation had the lowest GDP per capita in 1997?
@@ -39,20 +27,10 @@ low_gdp[1,]
 
 According to the data available, what was the average life expectancy across each continent in the 1980s?
 ``` {r}
-africa_80s <- filter(africa, year >= 1980 & year < 1990)
-mean(africa_80s$lifeExp)
-
-asia_80s <- filter(asia, year >= 1980 & year < 1990)
-mean(asia_80s$lifeExp)
-
-eur_80s <- filter(europe, year >= 1980 & year < 1990)
-mean(eur_80s$lifeExp)
-
-americas_80s <- filter(americas, year >= 1980 & year < 1990)
-mean(americas_80s$lifeExp)
-
-ocean_80s <- filter(oceania, year >= 1980 & year < 1990)
-mean(ocean_80s$lifeExp)
+data %>% 
+  group_by(continent) %>%
+  filter(year >= 1980 & year < 1990) %>%
+  summarize(life=mean(lifeExp))
 ```
 
 What 5 countries have the highest total GDP over all years combined?
@@ -106,7 +84,7 @@ this?
 ``` {r}
 gm1992 <- subset(data, year == 1992)
 class(gm1992)
-# tbl & data frame?
+# tbl, tbl.df, & data frame?
 ```
 
 Which observations indicate that the population of a country has decreased from the previous year and the life expectancy has increased from the previous year? See the vignette on window functions.
