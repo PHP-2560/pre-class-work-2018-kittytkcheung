@@ -13,7 +13,6 @@ printing <- function () {
   print(i)
   }
 }
-# is this just printing indices?
 ```
 
 ### Question 2:
@@ -62,5 +61,17 @@ survey <- data.frame(
 The response to each question should be an integer between 1 and 5. Obviously, we have some bad values in the dataframe. The goal of this problem is to fix them.
 
 A. Using a loop, create a new dataframe called survey.clean where all the invalid values (those that are not integers between 1 and 5) are set to NA.
+```{r}
+survey.clean = data.frame()
+for (i in 1:nrow(survey)) {
+  for (j in 1:ncol(survey)) {
+    if (survey[i,j] < 1 || survey[i,j] >5) {
+      survey.clean[i,j] = NA
+    } else {
+      survey.clean[i,j] = survey[i,j]
+    }
+  }
+}
+```
 
 B. Now, again using a loop, add a new column to the dataframe called “invalid.answers” that indicates, for each participant, how many bad answers they gave.
