@@ -64,6 +64,7 @@ A. Using a loop, create a new dataframe called survey.clean where all the invali
 ```{r}
 survey.clean = data.frame()
 for (i in 1:nrow(survey)) {
+  # I can't figure out how to only apply this to col 2-6 since col 1 is participants
   for (j in 1:ncol(survey)) {
     if (survey[i,j] < 1 || survey[i,j] >5) {
       survey.clean[i,j] = NA
@@ -75,3 +76,15 @@ for (i in 1:nrow(survey)) {
 ```
 
 B. Now, again using a loop, add a new column to the dataframe called “invalid.answers” that indicates, for each participant, how many bad answers they gave.
+```{r}
+survey$invalid.answers=""
+count = 0
+for (i in 1:nrow(survey)) {
+  for (j in 1:ncol(survey)) {
+    if (survey[i,j] = NA) {
+      count = count + 1
+      survey[7:j] = count
+    }
+  }
+}
+```
