@@ -123,5 +123,8 @@ A. Using a loop, calculate the mean weight of the subjects separated by the type
 ```
 B. Now do the same thing, but now don’t use a loop
 ```{r}
-
+library(dplyr)
+wcgs %>%
+  group_by(typchd69) %>%
+  summarize(means = mean(weight, na.rm=TRUE))
 ```
