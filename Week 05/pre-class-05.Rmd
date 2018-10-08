@@ -87,18 +87,16 @@ A. Create a function called standardize.me() that takes a numeric vector as an a
 standardize.me = function(x) {
   vec_mean = mean(x)
   vec_sd = sd(x)
-  print(vec_sd, vec_mean)
-  for (i in x) {
-    new_val = (i - vec_mean)/vec_sd
-    x[i] = new_val 
-  }
+  y = sapply(x,function(x) (x-vec_mean)/vec_sd)
+  y
 }
-
-test = c(5, 7, 8, 9, 10, 3, 2)
-
+  
+test = c(2,3,4,5,6,7,8)
+test2 = c(-3, -2, -1, 0, 1, 2, 3)
 ```
 B. Assign all the numeric columns of the original WCGS dataset to a new dataset called WCGS.new.
 ```{r}
+wcgs.new = wcgs[sapply(wcgs, is.numeric)]
 
 ```
 C. Using a loop and your new function, standardize all the variables WCGS.new dataset.
@@ -107,6 +105,7 @@ C. Using a loop and your new function, standardize all the variables WCGS.new da
 ```
 D. What should the mean and standard deviation of all your new standardized variables be? Test your prediction by running a loop
 ```{r}
+#print mean & sd
 
 ```
 
