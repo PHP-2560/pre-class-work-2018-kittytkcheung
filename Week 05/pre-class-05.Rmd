@@ -85,13 +85,13 @@ bmi     Body Mass Index
 A. Create a function called standardize.me() that takes a numeric vector as an argument, and returns the standardized version of the vector. 
 ```{r}
 standardize.me = function(x) {
-  vec_mean = mean(x)
-  vec_sd = sd(x)
+  vec_mean = mean(x, na.rm = TRUE)
+  vec_sd = sd(x, na.rm = TRUE)
   y = sapply(x,function(x) (x-vec_mean)/vec_sd)
   y
 }
   
-test = c(2,3,4,5,6,7,8)
+test = c(2,3,4,5,6,7,8, NA)
 test2 = c(-3, -2, -1, 0, 1, 2, 3)
 ```
 B. Assign all the numeric columns of the original WCGS dataset to a new dataset called WCGS.new.
@@ -101,12 +101,18 @@ wcgs.new = wcgs[sapply(wcgs, is.numeric)]
 ```
 C. Using a loop and your new function, standardize all the variables WCGS.new dataset.
 ```{r}
+for (i in 1:ncol(wcgs.new)) {
+  wcgs.new[,i] = standardize.me(wcgs.new[,i])
+}
 
 ```
 D. What should the mean and standard deviation of all your new standardized variables be? Test your prediction by running a loop
 ```{r}
 #print mean & sd
-
+for (i in 1:ncol(wcgs.new)) {
+  print(mean(wcgs.new[,i], na.rm = TRUE))
+  print(sd(wcgs.new[,i], na.rm = TRUE))
+}
 ```
 
 ### Question 2: Looping to Calculate
