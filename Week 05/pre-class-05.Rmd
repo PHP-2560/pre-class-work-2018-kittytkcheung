@@ -123,6 +123,7 @@ noCHD = c()
 misd = c()
 ang = c()
 smi = c()
+
 for (i in 1:nrow(wcgs)) {
     if (wcgs[i, "typchd69"] == "no CHD") {
       noCHD = c(noCHD, wcgs[i,"weight"])
