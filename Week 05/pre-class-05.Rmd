@@ -119,22 +119,23 @@ for (i in 1:ncol(wcgs.new)) {
 
 A. Using a loop, calculate the mean weight of the subjects separated by the type of CHD they have.
 ```{r}
-noCHD = c()
-misd = c()
-ang = c()
-smi = c()
-for (i in 1:length(wcgs$typchd69)) {
-  if (i == "no CHD") {
-    noCHD = c(noCHD, wcgs$weight[i])
-  } else if (i == "MI or SD") {
-    misd = c(misd, i)
-  } else if (i == "silent MI") {
-    smi = c(smi, i)
-  } else if (i == "angina") {
-    ang = c(ang, i)
+for (i in 1:nrow(wcgs)) {
+    if (wcgs[i, "typchd69"] == "no CHD") {
+      noCHD = c()
+      noCHD = append(noCHD, wcgs[i,"weight"])
+    } else if (wcgs[i, "typchd69"] == "MI or SD") {
+      misd = c()
+      misd = append(misd, wcgs[i,"weight"])
+    } else if (wcgs[i, "typchd69"] == "angina") {
+      ang = c()
+      ang = append(ang, wcgs[i,"weight"])
+    } else if (wcgs[i, "typchd69"] == "silent MI") {
+      smi = c()
+      smi = append(smi, wcgs[i,"weight"])
+    } 
   }
-}
-print(paste0("no CHD", mean(noCHD), "MI or SD", mean(misd)))
+
+print(paste0("silent MI ", mean(smi), "    angina ", mean(ang), "    MI or SD ", mean(misd), "    no CHD ", mean(noCHD)))
 ```
 B. Now do the same thing, but now don’t use a loop
 ```{r}
