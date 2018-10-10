@@ -119,12 +119,22 @@ for (i in 1:ncol(wcgs.new)) {
 
 A. Using a loop, calculate the mean weight of the subjects separated by the type of CHD they have.
 ```{r}
-chd_types = c("no CHD", "MI or SD", "angina", "silent MI")
-new_data = data.frame()
-for (i in 1:length(chd_types)) {
-  if 
+noCHD = c()
+misd = c()
+ang = c()
+smi = c()
+for (i in 1:length(wcgs$typchd69)) {
+  if (i == "no CHD") {
+    noCHD = c(noCHD, wcgs$weight[i])
+  } else if (i == "MI or SD") {
+    misd = c(misd, i)
+  } else if (i == "silent MI") {
+    smi = c(smi, i)
+  } else if (i == "angina") {
+    ang = c(ang, i)
+  }
 }
-
+print(paste0("no CHD", mean(noCHD), "MI or SD", mean(misd)))
 ```
 B. Now do the same thing, but now don’t use a loop
 ```{r}
