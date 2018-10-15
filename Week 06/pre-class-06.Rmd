@@ -1,34 +1,40 @@
 # pre-class
 
-
 Make sure you commit this often with meaningful messages. 
-
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 1. Read the source code for each of the following three functions, puzzle out what they do, and then brainstorm better names.
 
-```
-f1 <- function(string, prefix) {
+```{r}
+# returns string depending on length of prefix, then compares the two for equality
+compare_strings <- function(string, prefix) {
   substr(string, 1, nchar(prefix)) == prefix
 }
-f2 <- function(x) {
+
+# returns last element in x, given it is more than legnth 1
+last_item <- function(x) {
   if (length(x) <= 1) return(NULL)
   x[-length(x)]
 }
-f3 <- function(x, y) {
+
+# repeat vector y for the length of x
+repeat_vect <- function(x, y) {
   rep(y, length.out = length(x))
 }
 ```
 
 2. Compare and contrast rnorm() and MASS::mvrnorm(). How could you make them more consistent?
+rnorm()'s arguments are n, mean, and sd, while mvrnorm()'s are n, mu, and sigma. 
 
 
 3. Use `lapply()` and an anonymous function to find the coefficient of variation (the standard deviation divided by the mean) for all columns in the mtcars dataset. 
+```{r}
+
+
+```
 
 4. Use vapply() to:
     a. Compute the standard deviation of every column in a numeric data frame.
