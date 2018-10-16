@@ -32,7 +32,9 @@ repeat_vect <- function(x, y) {
 ```
 
 2. Compare and contrast rnorm() and MASS::mvrnorm(). How could you make them more consistent?
-rnorm() draws from the normal distribution, & mvrnorm() draws from multivariate normal distribution. rnorm()'s arguments are n, mean, and sd, while mvrnorm()'s are n, mu, and sigma. To make the arguments more consistent with what they actually represent, mvrnorm()'s mu argument should maybe indicate that mu is a vector argument with values each representing the means for the variables they represent (eg vect_of_means).  The sigma argument should indicate that it is a matrix representing the covariance matrix (eg covar_mtrx).
+rnorm() draws from a normal distribution, & mvrnorm() draws from a multivariate normal distribution. rnorm()'s arguments are n, mean, and sd, while mvrnorm()'s are n, mu, and sigma. 
+To make the arguments more consistent with what they actually represent, mvrnorm()'s mu argument should indicate that mu is a vector argument with values each representing the means for the variables they represent (eg vect_of_means).  The sigma argument should indicate that it is a matrix representing the covariance matrix (eg covar_mtrx).
+In terms of making an estimate more consistent to the true population value, you could increase sample sizes (the n parameters). 
 
 
 3. Use `lapply()` and an anonymous function to find the coefficient of variation (the standard deviation divided by the mean) for all columns in the mtcars dataset. 
