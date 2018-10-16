@@ -19,8 +19,8 @@ compare_strings <- function(string, prefix) {
   substr(string, 1, nchar(prefix)) == prefix
 }
 
-# returns last element in x, given it is more than legnth 1
-returns_last <- function(x) {
+# removes last element in x, given it is more than legnth 1
+removes_last <- function(x) {
   if (length(x) <= 1) return(NULL)
   x[-length(x)]
 }
