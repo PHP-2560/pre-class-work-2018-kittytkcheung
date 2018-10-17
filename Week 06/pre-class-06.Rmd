@@ -51,6 +51,3 @@ calc_sd = function(df) {vapply(df, sd, numeric(1))}
 ```{r}
 calc_sd_mixed = function(df) {vapply((df[vapply(df, class, character(1)) == "numeric"]), sd, numeric(1))}
 ```
-    
-
-
