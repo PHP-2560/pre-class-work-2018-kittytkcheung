@@ -79,47 +79,89 @@ bust500 = function(rep = 5000) {
 ```
     c. the mean time you go bust, given that you go bust within the first 5000 hands.
 ```{r}
-meanBust = function(rep = 5000) {
-  iter = c(1:rep)
-  count = 0
-  for (j in iter) {
-    if (gamblers(1000, 100, 5000)[2] < 5000) {
-      count = count + 1
-    }
-  }
-  return(count/rep)
-}
+data = replicate(5000, gamblers(1000,100,5000)[2])
+bust = data[data< 5000]
+meanBust = mean(bust)
 
 ```
     d. the mean and variance of your bankroll after 100 hands (including busts).
 ```{r}
+bankrollData = replicate(2500, gamblers(1000,100,100)[1])
+meanBankroll = mean(bankrollData)
+varBankroll = var(bankrollData)
 
 ```
     e. the mean and variance of your bankroll after 500 hands (including busts).
 ```{r}
-
+bankrollData500 = replicate(2500, gamblers(1000,100,500)[1])
+meanBankroll500 = mean(bankrollData500)
+varBankroll500 = var(bankrollData500)
 ```
  
 Note: you *must* stop playing if your player has gone bust. How will you handle this in the `for` loop?
 
 2. **Markov Chains**. Suppose you have a game where the probability of winning on your first hand is 48%; each time you win, that probability goes up by one percentage point for the next game (to a maximum of 100%, where it must stay), and each time you lose, it goes back down to 48%. Assume you cannot go bust and that the size of your wager is a constant $100.
 ```{r}
-mcGamblers = function(bankroll, prob = .48, betCost = 100) {
-  hands = c(1:100000)
+mcGamblers = function(bankroll = 50000, betCost = 100, numHands = 100) {
+  hands = c(1:numHands)
+  init = .48
   for (i in hands) {
-    allProbs = c()
-    aBet = rbinom(1,1,prob)
-    append(allProbs, aBet)
-    if (aBet == 1 && prob < 1) {
-      prob = prob + .01
+    aBet = rbinom(1,1,init)
+    if (aBet == 1 && init < 1) {
+      init = init + .01
+      bankroll = bankroll + betCost
     } else if (aBet == 1) {
-      prob
+      init
+      bankroll = bankroll + betCost
     } else {
-      prob = .48
+      init = .48
+      bankroll = bankroll - betCost
     }
   }
+  return(c(bankroll,init,i))
 }
 ```
     a. Is this a fair game? Simulate one hundred thousand sequential hands to determine the size of your return. Then repeat this simulation 99 more times to get a range of values to calculate the expectation.
+```{r}
+mcGamb_data = replicate(100, mcGamblers(bankroll = 50000, betCost = 100, numHands = 1000)[1]-50000)
+mcGamb_mean = mean(mcGamb_data)
+mcGamb_var = var(mcGamb_data)
+```
     b. Repeat this process but change the starting probability to a new value within 2% either way. Get the expected return after 100 repetitions. Keep exploring until you have a return value that is as fair as you can make it. Can you do this automatically?
+```{r}
+mcGamblers_auto = function(bankroll = 50000, betCost = 100, numHands = 100, prob1 = .46, prob2 = .5) {
+  iter = c(1:100)
+  init = (prob1 + prob2)/2
+  difference = -999999
+  while (difference <= -10000 |difference >= 10000) {
+    for (j in iter) {
+      hands = c(1:numHands)
+  
+      for (i in hands) {
+        aBet = rbinom(1,1,init)
+        if (aBet == 1 & init < 1) {
+          init = init + .01
+          bankroll = bankroll + betCost
+        } else if (aBet == 1) {
+          bankroll = bankroll + betCost
+        } else {
+          init = (prob1 + prob2)/2
+          bankroll = bankroll - betCost
+        }
+      }
+      difference = bankroll - 50000
+  
+      if (difference > 0) {
+        init = (prob1 + (prob1 + prob2)/2)/2
+      } else {
+        init = ((prob1 + prob2)/2 + prob2)/2
+      }
+    }
+  }
+  return(c(difference, bankroll,init,i))
+}
+```
     c. Repeat again, keeping the initial probability at 48%, but this time change the probability increment to a value different from 1%. Get the expected return after 100 repetitions. Keep changing this value until you have a return value that is as fair as you can make it. 
+```{r}
+
+```
