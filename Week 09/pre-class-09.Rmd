@@ -53,7 +53,11 @@ Hint: the base URL is “https://money.cnn.com”
 ```{r}
 url = read_html("https://money.cnn.com/data/us_markets/")
 
-html_attr(html_nodes(url,"td .wsod_symbol")))
+node = html_nodes(url,".wsod_symbol")
+attrib = html_attr(node, "href")
+print(paste0("https://money.cnn.com", attrib))
+
+
 ```
 7. Extract the titles under the “Latest News” section (bottom middle of the web page.)
 ```{r}
