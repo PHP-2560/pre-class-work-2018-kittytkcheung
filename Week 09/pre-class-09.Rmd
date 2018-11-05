@@ -35,22 +35,24 @@ html_session(webpage)
 ```
 3. Extract all of the sector names from the “Stock Sectors” table (bottom left of the web page.)
 ```{r}
-html_text(html_nodes(data, "a[href*='/data/sectors']"))
-
-
+library(XML)
+library(RCurl)
+data= getURL("https://money.cnn.com/data/us_markets/")
+readHTMLTable(data, which = 2, stringsAsFactors = FALSE )[,1]
 ```
 4. Extract all of the “3 Month % Change” values from the “Stock Sectors” table.
 ```{r}
-
+readHTMLTable(data, which = 2, stringsAsFactors = FALSE )[,2]
 ```
 5. Extract the table “What’s Moving” (top middle of the web page) into a data-frame.
 ```{r}
-
+readHTMLTable(data, which = 1, stringsAsFactors = FALSE )
 ```
 6. Re-construct all of the links from the first column of the “What’s Moving” table.
 Hint: the base URL is “https://money.cnn.com”
 ```{r}
-
+url = read_html("https://money.cnn.com/data/us_markets/")
+html_node(url, 'td#wsod_firstCol')
 ```
 7. Extract the titles under the “Latest News” section (bottom middle of the web page.)
 ```{r}
