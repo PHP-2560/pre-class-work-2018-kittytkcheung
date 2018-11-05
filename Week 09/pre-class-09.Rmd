@@ -52,7 +52,8 @@ readHTMLTable(data, which = 1, stringsAsFactors = FALSE )
 Hint: the base URL is “https://money.cnn.com”
 ```{r}
 url = read_html("https://money.cnn.com/data/us_markets/")
-html_node(url, 'td#wsod_firstCol')
+
+html_attr(html_nodes(url,"td .wsod_symbol")))
 ```
 7. Extract the titles under the “Latest News” section (bottom middle of the web page.)
 ```{r}
