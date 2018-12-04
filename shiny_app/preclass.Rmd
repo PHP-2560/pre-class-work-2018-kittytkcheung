@@ -2,11 +2,10 @@ install.packages("shiny")
 library(shiny)
 
 ui = fluidPage(
-  textInput(inputId = "zscore", label = "Set the z score to see the one tailed p value left of the z score"), 
-  verbatimTextOutput(outputId = "p value")
+  numericInput(inputId = "zscore", label = "Set the z score to see the one tailed p value left of the z score", 0), 
+  textOutput(outputId = "p value")
 )
 server = function(input, output) {
-  input$text = renderText(textInput)
-  output$text = renderText({ input$text })
+  output$text = renderText({pnorm(input$num)})
 }
 shinyApp(ui=ui, server=server)
