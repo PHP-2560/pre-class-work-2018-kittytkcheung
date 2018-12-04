@@ -1,11 +1,14 @@
 install.packages("shiny")
 library(shiny)
 
+
 ui = fluidPage(
   numericInput(inputId = "zscore", label = "Set the z score to see the one tailed p value left of the z score", 0), 
-  textOutput(outputId = "p value")
+  textOutput(outputId = "pvalue")
 )
+
 server = function(input, output) {
-  output$text = renderText({pnorm(input$num)})
+  output$pvalue = reactive({pnorm(input$zscore)})
 }
+
 shinyApp(ui=ui, server=server)
